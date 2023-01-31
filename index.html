@@ -1,42 +1,84 @@
 <!DOCTYPE html>
 <html>
-<body>
+  <style>
+    p {
+      font-size: 17px;
+    }
+  </style>
 
-<h1 style="text-align: center;">JavaScript Scope</h1>
-<hr>
-<h4>JavaScript has 2 types of scope:</h4>
-<p>
-  <b>Global scope:</b> 
-  Variables and functions declared outside of any function are in the global scope and are accessible from anywhere in the code.
-</p>
-<p>
-  <b>Local scope:</b> 
-  Variables and functions declared inside a function are in the local scope and are only accessible within that function.
-</p>
+  <body>
+  <!-- --------- JavaScript Scope --------- -->
+  <h1 style="text-align: center;">JavaScript Scope</h1>
+  <hr>
+  <h4>JavaScript has 2 types of scope:</h4>
+  <p>
+    <b>Global scope:</b> 
+    Variables and functions declared outside of any function are in the global scope and are accessible from anywhere in the code.
+  </p>
+  <p>
+    <b>Local scope:</b> 
+    Variables and functions declared inside a function are in the local scope and are only accessible within that function.
+  </p>
 
-<h3>Example: </h3>
-<p id="demo1"></p>
+  <h3>Example: </h3>
+  <p id="demo1"></p>
 
-<!-- demo 2 -->
-<p><b>Local scope message</b> is undefined outside the Function</p>
-<p id="demo2"></p>
+  <!-- demo 2 -->
+  <p><b>Local scope message</b> is undefined outside the Function</p>
+  <p id="demo2"></p>
 
-<script>
- 
-  // Global scope
+  <script>
   
-  let name = "John";
-  myFunction(); // outputs "Hello, John"
+    // Global scope
+    
+    let name = "John";
+    myFunction(); // outputs "Hello, John"
+  
+    function myFunction() {
+      // Local scope
+      let message = "Hello, " + name;
+      document.getElementById("demo1").innerHTML = message;;
+    }
+
+    document.getElementById("demo2").innerHTML = typeof message;
+
+  </script>
+
+  <!-- --------- JavaScript Hoisting --------- -->
+  <hr style="margin-top: 150px">
+  <h1 style="text-align: center">JavaScript Hoisting</h1>
+  <hr>
+  <p style="text-align: center;">
+    Hoisting is a behavior in JavaScript where variables and function declarations are moved to the top of their scope, 
+    <br>regardless of where they are defined. This means that they can be used before they are declared, 
+    <br>which can lead to unexpected behavior. Variables declared with the "var" keyword are hoisted, 
+    <br>while variables declared with "let" and "const" are not hoisted.
+  </p>
+  <p id="demo3"></p>
+  <p id="demo4"></p>
+  <p id="demo5"></p>
+
+  <script>  
+    document.getElementById("demo3").innerHTML = x; // Output: undefined
+    var x = 10;
+
+    hoistedFunc();     
+    function hoistedFunc() {
+      document.getElementById("demo4").innerHTML = 'I am a hoisted function: ' + x; // Output: I am a hoisted function: 10
+    }
+
+    document.getElementById("demo5").innerHTML = y; // Output: ReferenceError: y is not defined
+    let y = 20;
+
+  </script>
+
+
+  <!-- --------- JavaScript Hoisting --------- -->
+  <hr style="margin-top: 150px">
+  <h1 style="text-align: center">JavaScript Hoisting</h1>
+  <hr>
+  <script>  
+  </script>
  
-  function myFunction() {
-    // Local scope
-    let message = "Hello, " + name;
-    document.getElementById("demo1").innerHTML = message;;
-  }
-
-  document.getElementById("demo2").innerHTML = typeof message;
-
-</script>
-
-</body>
+  </body>
 </html>
