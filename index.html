@@ -2,7 +2,7 @@
 <html>
   <style>
     p {
-      font-size: 17px;
+      font-size: 18px;
     }
   </style>
 
@@ -73,12 +73,64 @@
   </script>
 
 
-  <!-- --------- JavaScript Hoisting --------- -->
+  <!-- --------- JavaScript Closures --------- -->
   <hr style="margin-top: 150px">
-  <h1 style="text-align: center">JavaScript Hoisting</h1>
+  <h1 style="text-align: center">JavaScript Closures</h1>
   <hr>
-  <script>  
-  </script>
+  <p style="text-align: center;">
+    A closure is a feature of JavaScript that allows inner functions to access their outer scope.<br>
+    A closure is a function having access to the parent scope.
+  </p>
+  <p>Counting with a local variable.</p>
+
+  <button type="button" onclick="myFunction()">Count!</button>
+
+  <p id="demo6">0</p>
+  <p id="demo7"></p>
+  <p id="demo8"></p>
+  <script>
+  // Function to increment counter
+  function add() {
+    let counter = 0;
+    counter += 1;
+    return counter;
+  }
+  // Trying to increment the counter
+  function myFunction(){
+    document.getElementById("demo6").innerHTML =  add();
+  }
+
+  // ---- one more example --------
+  function outerFunc(out) {
+    return function innerFunc(inn) {
+      return out * inn;
+    };
+  }
+
+  const getFunction = outerFunc(5);
+  document.getElementById("demo7").innerHTML = 'Example 1: ' + getFunction(2); // output 10
+
+  // ---- one more example --------
+
+  var a = 10;
+  
+  const closure = foo(); // Closure  
+  closure();
+
+  function foo() {
+    var b = 5;
+    return function bar() {
+      var c = 2;
+      var output = a + b + c;
+      return output;
+    }
+  }
+  document.getElementById("demo8").innerHTML = 'Example 2: ' +  closure(); // output 
+  // executes the function bar which was returned when we executed the function foo in the line above. 
+
+</script>
+
+
  
   </body>
 </html>
