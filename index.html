@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1 style="text-align: center;">JavaScript Scope</h1>
+<hr>
+<h3>JavaScript has 2 types of scope:</h3>
+<p>
+  <b>Global scope:</b> 
+  Variables and functions declared outside of any function are in the global scope and are accessible from anywhere in the code.
+</p>
+<p>
+  <b>Local scope:</b> 
+  Variables and functions declared inside a function are in the local scope and are only accessible within that function.
+</p>
+
+<p id="demo1"></p>
+
+<!-- demo 2 -->
+<p><b>message</b> is undefined outside the Function:</p>
+<p id="demo2"></p>
+
+<script>
+ 
+  // Global scope
+  
+  let name = "John";
+  myFunction(); // outputs "Hello, John"
+ 
+  function myFunction() {
+    // Local scope
+    let message = "Hello, " + name;
+    document.getElementById("demo1").innerHTML = message;;
+  }
+
+  document.getElementById("demo2").innerHTML = typeof message;
+
+</script>
+
+</body>
+</html>
