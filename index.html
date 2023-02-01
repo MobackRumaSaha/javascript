@@ -2,7 +2,9 @@
 <html>
   <style>
     p {
-      font-size: 18px;
+      font-size: 20px;
+      color: #625d5d;
+      line-height: 1.5;
     }
   </style>
 
@@ -135,8 +137,7 @@
   <h1 style="text-align: center">JavaScript Callbacks</h1>
   <hr>
   <p style="text-align: center;">
-    A JavaScript callback is a function that is passed as an argument to another function and is executed after some kind of event. 
-    <br>For example, consider the following code:
+    A JavaScript callback is a function that is passed as an argument to another function and is executed after some kind of event.
   </p>
   
   <button type="button" id="callback">button</button>
@@ -248,6 +249,137 @@
       console.log('evenNumbers: ', evenNumbers); // [2, 4]
 
     </script>
+
+    <!-- --------- JavaScript Promises --------- -->
+    <hr style="margin-top: 150px">
+    <h1 style="text-align: center">JavaScript Promises</h1>
+    <hr>
+    <p style="text-align: center;">
+      A Promise in JavaScript is a way to handle the completion or failure of an asynchronous operation. 
+      <br>It's an object that represents the outcome of an operation that may not be finished yet. 
+      <br>Promises provide a way to register callbacks to be executed when the operation has completed or failed, 
+      <br>making it easier to handle the results of asynchronous operations.
+    </p>
+   
+    <p>
+      <code>
+        let promise = new Promise(function(resolve, reject) {
+        // executor (the producing code, "singer")
+      });
+      </code>
+      <br>
+      The function passed to new Promise is called the executor. When new Promise is created, the executor runs automatically. 
+      <br>It contains the producing code which should eventually produce the result. In terms of the analogy above: the executor is the “singer”.
+
+      <br><br>Its arguments resolve and reject are callbacks provided by JavaScript itself. Our code is only inside the executor.
+
+      <br><br>When the executor obtains the result, be it soon or late, doesn’t matter, it should call one of these callbacks:
+
+      <br>resolve(value) — if the job is finished successfully, with result value.
+      <br>reject(error) — if an error has occurred, error is the error object.
+      <br>So to summarize: the executor runs automatically and attempts to perform a job. When it is finished with the attempt, 
+      <br>it calls resolve if it was successful or reject if there was an error.
+
+      <br><br>The promise object returned by the new Promise constructor has these internal properties:
+
+      <br>state — initially "pending", then changes to either "fulfilled" when resolve is called or "rejected" when reject is called.
+      <br>result — initially undefined, then changes to value when resolve(value) is called or error when reject(error) is called.
+    </p>
+    <p>Promise Output: <span id="demo10"></span></p>
+    <script>
+    
+      let promise = new Promise((resolve, reject) => {
+        let success = Math.random() >= 0.5;
+
+        if (success) {
+          resolve("The operation was successful.");
+        } else {
+          reject("The operation failed.");
+        }
+      });
+
+      promise.then(value => {
+          console.log('value: ', value);
+      }).catch(error => {
+          console.error('error: ', error);
+      });
+
+      // example: 2
+      const delay = (time) => {
+        return new Promise((resolve) => {
+          setTimeout(() => {
+            resolve();
+          }, time);
+        });
+      };
+
+      console.log('Starting...');
+      var times = 3000;
+
+      delay(times)
+        .then(() => {
+          //console.log(times + ' seconds have passed!');
+          let output = times + ' seconds have passed!'
+          document.getElementById("demo10").innerHTML = output; // output 
+      });
+
+      // example: 2
+      const task1 = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('Task 1 completed!');
+          resolve();
+        }, 1000);
+      });
+    };
+
+    const task2 = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('Task 2 completed!');
+          resolve();
+        }, 2000);
+      });
+    };
+
+    const task3 = () => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          console.log('Task 3 completed!');
+          resolve();
+        }, 500);
+      });
+    };
+
+    console.log('Starting all tasks...');
+
+    // in sequence
+    task1().then(task2)
+      .then(task3)
+      .then(() => {
+      console.log('All tasks completed in sequence!');
+    });
+
+    // In this example, three tasks are defined (task1, task2, task3), 
+    // each of which returns a Promise that resolves after a specified amount of time has passed. 
+    // The then method is used to run each task in sequence, 
+    // so that task2 only starts after task1 has completed, 
+    // and task3 only starts after task2 has completed. 
+    // When all the Promises have resolved, the final then method logs "All tasks completed in sequence!" to the console.
+    
+    // Promise.all method 
+    Promise.all([task1(), task2(), task3()]).then(() => {
+        console.log('All tasks completed!');
+    });
+
+    // In this example, three tasks are defined (task1, task2, task3), 
+    // each of which returns a Promise that resolves after a specified amount of time has passed. 
+    // The Promise.all method is used to run all three tasks in parallel. 
+    // When all the Promises have resolved, the then method logs "All tasks completed!" to the console.
+    
+    </script>
+
+
  
   </body>
 </html>
