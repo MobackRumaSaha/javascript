@@ -89,48 +89,165 @@
   <p id="demo7"></p>
   <p id="demo8"></p>
   <script>
-  // Function to increment counter
-  function add() {
-    let counter = 0;
-    counter += 1;
-    return counter;
-  }
-  // Trying to increment the counter
-  function myFunction(){
-    document.getElementById("demo6").innerHTML =  add();
-  }
-
-  // ---- one more example --------
-  function outerFunc(out) {
-    return function innerFunc(inn) {
-      return out * inn;
-    };
-  }
-
-  const getFunction = outerFunc(5);
-  document.getElementById("demo7").innerHTML = 'Example 1: ' + getFunction(2); // output 10
-
-  // ---- one more example --------
-
-  var a = 10;
-  
-  const closure = foo(); // Closure  
-  closure();
-
-  function foo() {
-    var b = 5;
-    return function bar() {
-      var c = 2;
-      var output = a + b + c;
-      return output;
+    // Function to increment counter
+    function add() {
+      let counter = 0;
+      counter += 1;
+      return counter;
     }
-  }
-  document.getElementById("demo8").innerHTML = 'Example 2: ' +  closure(); // output 
-  // executes the function bar which was returned when we executed the function foo in the line above. 
+    // Trying to increment the counter
+    function myFunction(){
+      document.getElementById("demo6").innerHTML =  add();
+    }
 
-</script>
+    // ---- one more example --------
+    function outerFunc(out) {
+      return function innerFunc(inn) {
+        return out * inn;
+      };
+    }
+
+    const getFunction = outerFunc(5);
+    document.getElementById("demo7").innerHTML = 'Example 1: ' + getFunction(2); // output 10
+
+    // ---- one more example --------
+
+    var a = 10;
+    
+    const closure = foo(); // Closure  
+    closure();
+
+    function foo() {
+      var b = 5;
+      return function bar() {
+        var c = 2;
+        var output = a + b + c;
+        return output;
+      }
+    }
+    document.getElementById("demo8").innerHTML = 'Example 2: ' +  closure(); // output 
+    // executes the function bar which was returned when we executed the function foo in the line above. 
+
+  </script>
+
+  <!-- --------- JavaScript Callbacks --------- -->
+  <hr style="margin-top: 150px">
+  <h1 style="text-align: center">JavaScript Callbacks</h1>
+  <hr>
+  <p style="text-align: center;">
+    A JavaScript callback is a function that is passed as an argument to another function and is executed after some kind of event. 
+    <br>For example, consider the following code:
+  </p>
+  
+  <button type="button" id="callback">button</button>
+  <p id="demo9"></p>
+
+  <script>  
+    var button = document.getElementById("callback");
+
+    function handleClick() {
+      var output = "Button was clicked!"
+      document.getElementById("demo9").innerHTML = output; // output 
+    }
+
+    button.addEventListener("click", handleClick);
+    
+
+    // Here, we are selecting a button element from the HTML document and 
+    // creating a handleClick function that logs a message to the console when the button is clicked. 
+    // The addEventListener method is used to register an event listener on the button that listens for the click event and 
+    // calls the handleClick function as a callback when the button is clicked.
+    // Every time the button is clicked, the handleClick function is executed and logs the message "Button was clicked!" to the console.
+  
+    </script>
+
+    <script>
+      function greeting(item) {
+        console.log("Hello " + item);
+      }
+
+      function processUserInput(callback) {
+        var name = 'Doe'
+        callback(name);
+      }
+
+      processUserInput(greeting);
+
+      // Example: 2
+      function getData(callback) {
+        // simulate a long-running operation
+        setTimeout(function() {
+          let data = {
+            name: 'John Doe',
+            age: 35
+          };
+          callback(data);
+        }, 1000);
+      }
+
+      getData(function(item) {
+        console.log(item);
+      });
+
+      // Example: 3
+      function printMessage(message, callback) {
+        console.log(message);
+        callback();
+      }
+
+      function printFinished() {
+        console.log('Finished printing message.');
+      }
+
+      printMessage('Hello, World!', printFinished); // printFinished is a function used as an argument to another function
+
+      // Example: 4
+      function processArray(array, callback) {
+        for (let i = 0; i < array.length; i++) {
+          callback(array[i]);
+        }
+      }
+
+      let numbers = [1, 2, 3, 4, 5];
+
+      processArray(numbers, function(item) {
+        console.log('item: ', item);
+      });
+
+      // Example: 5
+      function map(array, callback) {
+        let result = [];
+        for (let i = 0; i < array.length; i++) {
+          result.push(callback(array[i]));
+        }
+        return result;
+      }
+
+      let squared = map(numbers, function(number) {
+        return number * number;
+      });
+
+      console.log('squared: ', squared); // [1, 4, 9, 16, 25]
+
+      //Example: 6
+      function filter(array, callback) {
+        let result = [];
+        for (let i = 0; i < array.length; i++) {
+          if (callback(array[i])) {
+            result.push(array[i]);
+          }
+        }
+        return result;
+      }
 
 
+      let evenNumbers = filter(numbers, function(number) {
+        return number % 2 === 0;
+      });
+
+      console.log('evenNumbers: ', evenNumbers); // [2, 4]
+
+    </script>
  
   </body>
 </html>
