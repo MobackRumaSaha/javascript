@@ -379,6 +379,67 @@
     
     </script>
 
+    <!-- --------- JavaScript Destructuring --------- -->
+    <hr style="margin-top: 150px">
+    <h1 style="text-align: center">JavaScript Destructuring </h1>
+    <hr>
+    <p style="text-align: center;">
+      Destructuring is a JavaScript expression that allows us to 
+      <br>extract data from arrays, objects, and maps and set them into new, distinct variables. 
+      <br>Destructuring allows us to extract multiple properties, or items, from an array​ at a time.
+    </p>
+    <p id="ex_1"></p>
+
+    <script>
+
+      // Destructure values from an object:
+      var employee = {    // Object we want to destructure
+          firstname: 'Jon',
+          lastname: 'Snow',
+          dateofbirth: '1990'
+      };
+
+      // Destructuring the object into our variables
+      var { firstname, lastname, dateofbirth } = employee;
+      console.log( firstname, lastname, dateofbirth);
+      
+      // example: 2 --- Destructuring the object into variables with different names than the object variables
+      var { firstname: fn, lastname: ln, dateofbirth: dob } = employee;
+      console.log( fn, ln, dob);
+
+      // Example of array destructuring:
+      let arr = [1, 2, 3, 4, 5];
+      let [m, n, o] = arr;
+      console.log(m); // 1
+      console.log(n); // 2
+      console.log(o); // 3
+
+      
+      let [p, q, ...rest] = arr;
+      console.log('p:' , p); // 1
+      console.log('q: ', q); // 2
+      console.log('rest: ', rest); // [3, 4, 5]
+
+  
+      let arrCopy = [...arr];
+      console.log('arrCopy: ', arrCopy); 
+
+      let str = "Hello";
+      let strCopy = [...str];
+      console.log('strCopy: ', strCopy);
+      
+      // example: Destructuring function parameters:
+      function calculateBMI({ weight, height }) {
+        return weight / (height ** 2);
+      }
+      let cperson = {
+        weight: 70,
+        height: 1.76
+      };
+      output = calculateBMI(cperson)
+      document.getElementById("ex_1").innerHTML = output; // output 22.59
+
+    </script>
 
  
   </body>
