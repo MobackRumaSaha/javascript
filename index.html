@@ -532,8 +532,70 @@
 
     logUsers();
 
+    </script>
+
+    <!-- --------- JavaScript ES modules and Import/Export --------- -->
+    <hr style="margin-top: 150px">
+    <h1 style="text-align: center">JavaScript ES modules and Import/Export</h1>
+    <hr>
+    <p style="text-align: center;">
+      ES Modules (ECMAScript Modules) is a standardized module system in JavaScript, 
+      <br>which allows you to split your code into smaller, reusable pieces called modules. 
+      <br>Each module can be imported and used by other modules in your application.
+    </p>
+
+    <script>
+      // File math.js:
+      export function add(a, b) {
+        return a + b;
+      }
+
+      export function subtract(a, b) {
+        return a - b;
+      }
+
+      // File file.js:
+      import { add, subtract } from './file.js';
+
+      console.log(add(1, 2)); // 3
+      console.log(subtract(5, 3)); // 2
+
+      // ---------------------
+      //File colors.js:
+      export const red = '#ff0000';
+      export const blue = '#0000ff';
+
+      // File palette.js:
+      export { red, blue } from './colors.js';
+      
+      //File index.js:
+      import { red, blue } from './palette.js';
+      console.log(red); // #ff0000
+      console.log(blue); // #0000ff
+
+      // example 2: Here's an example of using the wildcard * character to import all exports from a module:
+      import * as colors from './palette.js'; 
+      console.log(colors.red); // #ff0000
+      console.log(colors.blue); // #0000ff
+     
+      // Here's an example of combining export default and named exports in a single module:
+      //File person.js:
+      const pname = 'John Doe';
+      const age = 30;
+
+      export { pname as personName };
+      export default age;
+
+      // File index.js:
+      import personAge, { personName } from './person.js';
+
+      console.log(personName); // John Doe
+      console.log(personAge); // 30
 
     </script>
+
+
+    
 
   </body>
 </html>
