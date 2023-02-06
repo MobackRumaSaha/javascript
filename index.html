@@ -665,5 +665,205 @@
 
     </script>
 
+
+    <!-- --------- lodash library --------- -->
+    <hr style="margin-top: 150px">
+    <h1 style="text-align: center">Lodash library</h1>
+    <hr>
+    <p style="text-align: center;">
+      Lodash is a JavaScript library that provides utility functions for common programming tasks. 
+      <br>It is a popular tool for working with arrays, objects, strings, and other data structures, 
+      <br>and it offers a wide range of functions for manipulating and transforming data. 
+      <br>Some of the most commonly used functions in Lodash include map, filter, reduce, and sort.
+    </p>
+    
+    <!-- added lodash script -->
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.20/lodash.min.js"></script> 
+    <script> 
+      // Filtering an array based on a condition
+      const people = [
+        { name: 'John', age: 20 },
+        { name: 'Jane', age: 30 },
+        { name: 'Jim', age: 25 }
+      ];
+      const adults = _.filter(people, person => person.age >= 25);
+      // const adults = people.filter(person => person.age >= 25);
+      console.log('adults: ', adults);
+      // Output: [
+      //   { name: 'Jane', age: 30 },
+      //   { name: 'Jim', age: 25 }
+      // ]
+
+      // 1. Finding the maximum value in an array
+      const array = [ 4, 5, 6, 7];
+      const maxvalue = _.max(array);
+      const minValue = _.min(array);
+
+      console.log('minValue', minValue); // Output: 4
+      console.log('maximum value in an array:', maxvalue); // Output:7
+
+      // 2. Grouping items in an array based on a property
+      const pets = [
+        { type: 'dog', name: 'Max' },
+        { type: 'cat', name: 'Mittens' },
+        { type: 'dog', name: 'Buddy' }
+      ];
+      const groupedPets = _.groupBy(pets, 'type');
+      console.log(groupedPets);
+      // Output: {
+      //   dog: [
+      //     { type: 'dog', name: 'Max' },
+      //     { type: 'dog', name: 'Buddy' }
+      //   ],
+      //   cat: [
+      //     { type: 'cat', name: 'Mittens' }
+      //   ]
+      // }
+
+      // 3. Checking if an object has a specific property:
+      const person = { name: 'John', age: 25 };
+      const hasName = _.has(person, 'name');
+      console.log('hasName: ', hasName);  // Output: true
+
+      // 4. Joining elements of an array into a string:
+      const words = ['Hello', 'world'];
+      const sentence = _.join(words, ' ');
+      console.log(sentence); // Output: Hello world
+
+      // 5. Removing duplicates from an array:
+      const unumbers = [2, 2, 3, 2, 4, 4, 5] 
+      const uniqueNumbers = _.uniq(unumbers); 
+      console.log('uniqueNumbers', uniqueNumbers); // Output: [2, 3, 4, 5]
+
+      // 6. Sorting an array of objects based on a property:
+      const employees = [
+        { name: 'Jane', salary: 50000 },
+        { name: 'John', salary: 60000 },
+        { name: 'Jim', salary: 55000 }
+      ];
+
+      const sortedEmployees = _.sortBy(employees, 'salary');
+      console.log('sortedEmployees', sortedEmployees);
+
+      // Output: [
+      //   { name: 'Jane', salary: 50000 },
+      //   { name: 'Jim', salary: 55000 },
+      //   { name: 'John', salary: 60000 }
+      // ]
+
+      const reversesortedEmployees = _.sortBy(employees, 'salary').reverse();
+      console.log('reversesortedEmployees', reversesortedEmployees);
+      
+      // Output: [
+      //  {name: 'John', salary: 60000}
+      //  {name: 'Jim', salary: 55000}
+      //  {name: 'Jane', salary: 50000}
+      // ]
+
+     
+      const employeeO = { name: 'John', salary: 60000, department: 'Sales' };
+      
+      // 7. Converting an object to an array:
+      const employeeArray = _.toArray(employeeO);
+      console.log('employeeArray', employeeArray); // output [ 'John',  60000, 'Sales' ]
+
+      // 8. Picking certain properties from an object:
+      const importantProperties = _.pick(employeeO, ['name', 'salary']);
+      console.log('importantProperties', importantProperties); // output { name: 'John', salary: 60000 }
+
+      // Getting the values of an object:
+      const values = _.values(employeeO);
+      console.log('Getting the values of an object:', values); // output [ 'John',  60000, 'Sales' ]
+
+      // 9. Checking if a value is a plain object:
+      const obj = { name: 'John' };
+      const arrv = [1, 2, 3];
+      const num = 42;
+      const strv = 'hello';
+
+      console.log(_.isPlainObject(obj)); // true
+      console.log(_.isPlainObject(arrv)); // false
+      console.log(_.isPlainObject(num)); // false
+      console.log(_.isPlainObject(strv)); // false
+
+      console.log(_.isNumber(num)); // true
+      console.log(_.isNumber(strv)); // false
+
+      // The isPlainObject function checks if a value is a plain object, 
+      // i.e. an object created with the {} syntax or the Object constructor.
+
+      // 10. Removing elements from an array:
+      const numbersE = [4, 5, 6, 8, 9];
+
+      const updatedNumbers = _.pull(numbersE, 4, 8);
+
+      console.log('numbersE:', numbersE);
+      console.log('updatedNumbers', updatedNumbers);
+
+
+      // 11. Merging two objects:
+      const obj1 = { name: 'john', salary: 60000 }
+      const obj2 = { department: 'Sales', type: 'abcd' }
+      const mergeObj = _.merge(obj1, obj2);
+      console.log('mergeObj:', mergeObj); // output: { name: 'John', salary: 60000, department: 'Sales', type: 'abcd' }
+      
+      // 12. Finding the first element in an array that meets a certain condition:
+      const Enumbers = [3, 4, 5, 6];
+      const firstEvenNumber = _.find(Enumbers, num => num % 2 === 0);
+      console.log('firstEvenNumber', firstEvenNumber);
+
+      // 13. Cloning an object:
+      const originalO = { name: 'John', age: 30, salary: 60000 };
+      const clone = _.clone(originalO);
+      console.log('clone: ', clone); // output { name: 'John', age: 30, salary: 60000 };
+ 
+      // 14. Cloning a mixed object
+      let original = {
+      name: 'John',
+      address: {
+        street: '123 Main St',
+        city: 'San Francisco',
+        state: 'CA'
+      },
+      hobbies: ['reading', 'traveling']
+    };
+
+    let cloneDeep = _.cloneDeep(original);
+
+    // Modifying the original object
+    original.name = 'Jane Doe';
+    original.address.street = '456 Main St';
+    original.hobbies.push('swimming');
+
+    console.log('original', original);
+    // { name: 'Jane Doe',
+    //   address: { street: '456 Main St', city: 'San Francisco', state: 'CA' },
+    //   hobbies: [ 'reading', 'traveling', 'swimming' ] }
+
+    console.log('cloneDeep', cloneDeep);
+    // { name: 'John',
+    //   address: { street: '123 Main St', city: 'San Francisco', state: 'CA' },
+    //   hobbies: [ 'reading', 'traveling' ] }
+
+    // As we can see, even though we modify the original object, the clone object remains unchanged, 
+    // as _.cloneDeep creates a completely independent copy of the original object, 
+    // including all of its nested objects and arrays.
+
+    //  Cloning a date object
+
+    let originalDate = new Date('2022-01-10');
+    let dateCloneDeep = _.cloneDeep(originalDate);
+
+    // Modifying the original date object
+    originalDate.setFullYear(2023);
+
+    console.log('originalDate', originalDate);
+    // Tue Jan 10 2023 05:30:00 GMT+0530 (India Standard Time)
+
+    console.log('dateCloneDeep', dateCloneDeep);
+    // Mon Jan 10 2022 05:30:00 GMT+0530 (India Standard Time)
+
+    </script>
+
   </body>
 </html>
