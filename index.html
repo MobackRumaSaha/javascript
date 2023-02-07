@@ -216,7 +216,7 @@
       });
 
       // Example: 5
-      function map(array, callback) {
+      function amap(array, callback) {
         let result = [];
         for (let i = 0; i < array.length; i++) {
           result.push(callback(array[i]));
@@ -224,14 +224,14 @@
         return result;
       }
 
-      let squared = map(numbers, function(number) {
+      let squared = amap(numbers, function(number) {
         return number * number;
       });
 
       console.log('squared: ', squared); // [1, 4, 9, 16, 25]
 
       //Example: 6
-      function filter(array, callback) {
+      function afilter(array, callback) {
         let result = [];
         for (let i = 0; i < array.length; i++) {
           if (callback(array[i])) {
@@ -242,7 +242,7 @@
       }
 
 
-      let evenNumbers = filter(numbers, function(number) {
+      let evenNumbers = afilter(numbers, function(number) {
         return number % 2 === 0;
       });
 
@@ -862,6 +862,97 @@
 
     console.log('dateCloneDeep', dateCloneDeep);
     // Mon Jan 10 2022 05:30:00 GMT+0530 (India Standard Time)
+
+    </script>
+
+    <!-- ---------  Rxjs --------- -->
+    <hr style="margin-top: 150px">
+    <h1 style="text-align: center">Rxjs</h1>
+    <hr>
+    <p style="text-align: center;">
+      RxJS is Reactive Extension for Javascript.
+      <br>It is a javascript library that uses observables to work with reactive programming that deals with 
+      <br>asynchronous data calls, callbacks and event-based programs.
+    </p>
+    <script src="https://unpkg.com/rxjs@6.6.3/bundles/rxjs.umd.min.js"></script>
+    <script>
+
+      const { of, from, fromEvent, interval, concat, merge } = rxjs;
+      const { map, catchError }  = rxjs.operators;
+      const { ajax } = rxjs.ajax;
+
+      // example 1
+      // const observable = from([1, 2, 3, 4, 5]);
+      const numbersR = of(1, 2, 3, 4, 5);
+      const squares = numbersR.pipe(map(n => n * n));
+
+      squares.subscribe(
+        value => console.log('value:', value),
+        error => console.error('error', error),
+        () => console.log('complete')
+      );
+
+      // example: 2. how we can use observables to handle mouse clicks:
+      // const button = document.querySelector('button');
+      const clicks$ = fromEvent(button, 'click');
+
+      clicks$.subscribe(
+        event => console.log(event),
+        error => console.error(error),
+        () => console.log('Complete click!')
+      );
+
+
+      // example of using RxJS to create an observable that represents a timer:
+      const timer = interval(1000);
+      timer.subscribe(value =>{
+         // console.log(`Timer value: ${value}`)
+      });
+
+      // example of using RxJS to handle asynchronous HTTP requests:
+     
+      const apiUrl = 'https://jsonplaceholder.typicode.com/posts';
+      const request$ = ajax.getJSON(apiUrl);
+
+      request$.pipe(
+        map(response => response),
+        catchError(error => of({ error: error.message })))
+        .subscribe(response => {
+          console.log('response', response[0])
+        });
+
+    // In this example, the ajax.getJSON method from the RxJS ajax module is used to 
+    // make an HTTP GET request to the specified API URL. 
+    // The map operator is used to extract the response data, and 
+    // the catchError operator is used to handle any errors that occur during the request. 
+    // The of operator is used to return an observable that emits a single value in case of an error. 
+    // Finally, the subscribe method is used to subscribe to the observable and
+    // log the response data or error message to the console.
+      
+    // Example: how we can use the concat operator to concatenate the values of multiple observables into a single stream
+    const numbers1$ = of(1, 2, 3);
+    const numbers2$ = of(4, 5, 6);
+    const numbers3$ = of(7, 8, 9);
+
+    const allNumbers$ = concat(numbers1$, numbers2$, numbers3$); // join operator
+
+    allNumbers$.subscribe(
+      value => console.log('allNumbers value', value),
+      error => console.error(error),
+      () => console.log('Complete!')
+    );
+
+    // we can use the merge operator to merge the values of multiple observables into a single stream:
+    const numbers4$ = interval(1000).pipe(map(n => n + 1));
+    const numbers5$ = interval(500).pipe(map(n => n + 100));
+
+    const mergedNumbers$ = merge(numbers4$, numbers4$);
+
+    // mergedNumbers$.subscribe(
+    //   value => console.log(value),
+    //   error => console.error(error),
+    //   () => console.log('Complete!')
+    // );
 
     </script>
 
