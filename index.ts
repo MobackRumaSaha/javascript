@@ -93,6 +93,100 @@ if (getCustomer) {
   getCustomer.innerHTML = `Hello, my fullName is ${customer.getFullName()}`;
 }
 
+//data types example of Typescript
+let num1: number = 123;
+console.log(num1); // 123
+
+let jname: string = "John Doe";
+console.log(jname); // John Doe
+
+// example: Interfaces can also be used to enforce a specific type for function parameters and return values: 
+interface AddFn {
+  (a: number, b: number): number;
+}
+
+let add: AddFn;
+
+add = function(a: number, b: number): number {
+  return a + b;
+};
+
+console.log("addfn: ", add(1, 2)); // 3
+
+// Example: 
+interface Vehicle {
+  make: string;
+  model: string;
+  year: number;
+  startEngine(): void;
+}
+
+class Car implements Vehicle {
+  make: string;
+  model: string;
+  year: number;
+
+  constructor(make: string, model: string, year: number) {
+    this.make = make;
+    this.model = model;
+    this.year = year;
+  }
+
+  startEngine(): void {
+    console.log("The engine is running.");
+  }
+}
+
+let car: Car = new Car("Toyota", "Camry", 2020);
+console.log(car);
+// Output: Car { make: 'Toyota', model: 'Camry', year: 2020 }
+
+car.startEngine();
+// Output: The engine is running.
+
+
+//
+// import { Component } from "@angular/core";
+
+// @Component({
+//   selector: "app-customer-details",
+//   template: `
+//     <h2>{{ customer.fullName }}</h2>
+//     <p>Email: {{ customer.email }}</p>
+//   `
+// })
+// export class CustomerDetailsComponent {
+//   customer: Customer;
+
+//   constructor(private customerService: CustomerService) {}
+
+//   ngOnInit() {
+//     this.customer = this.customerService.getSelectedCustomer();
+//   }
+// }
+
+// interface Customer {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+// }
+
+// @Injectable({
+//   providedIn: "root"
+// })
+// export class CustomerService {
+//   selectedCustomer: Customer;
+
+//   getSelectedCustomer(): Customer {
+//     return this.selectedCustomer;
+//   }
+
+//   setSelectedCustomer(customer: Customer) {
+//     this.selectedCustomer = customer;
+//   }
+// }
+
+
 
 // npm install -g typescript
 // Run the command: tsc index.ts
